@@ -15,7 +15,7 @@ const initialState: AssessmentState = {
   currentQuestionIndex: 0,
   answers: [],
   timer: {
-    timeLeft: 10,
+    timeLeft: 1320,
     isRunning: false,
     isPaused: false,
   },

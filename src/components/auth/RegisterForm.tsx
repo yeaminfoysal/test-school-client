@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
@@ -71,6 +72,7 @@ const RegisterForm: React.FC = () => {
       
       toast.success('Registration successful! Please check your email to verify your account.');
       navigate('/verify-email', { state: { email: formData.email } });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast.error(error?.data?.message || 'Registration failed. Please try again.');
     }

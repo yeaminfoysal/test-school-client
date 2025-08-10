@@ -37,17 +37,17 @@ export const questionApi = createApi({
         page?: number;
         limit?: number;
         competency?: string;
-        level?: CompetencyLevel;
+        currentLevel?: CompetencyLevel;
         student?: string
       }
     >({
-      query: ({ page = 1, limit = 20, competency, level, student }) => {
+      query: ({ page = 1, limit = 20, competency, currentLevel, student }) => {
         const params = new URLSearchParams({
           page: page.toString(),
           limit: limit.toString(),
         });
         if (competency) params.append('competency', competency);
-        if (level) params.append('level', level);
+        if (currentLevel) params.append('currentLevel', currentLevel);
         if (student) params.append('student', student);
         return `?${params.toString()}`;
       },

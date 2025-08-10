@@ -151,11 +151,6 @@ const LoginForm: React.FC = () => {
         {/* Demo credentials */}
         <div className="mt-8 p-4 bg-gray-50 rounded-lg">
           <h4 className="font-medium text-gray-900 mb-2">Demo Credentials:</h4>
-          <div className="text-sm text-gray-600 space-y-1">
-            <p><strong>Admin:</strong> admin@testschool.com / Admin123!</p>
-            <p><strong>Student:</strong> student@testschool.com / Student123!</p>
-            <p><strong>Supervisor:</strong> supervisor@testschool.com / Supervisor123!</p>
-          </div>
         </div>
       </Card>
     </div>

@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
   );
 
   const handleStartAssessment = () => {
-    const nextStep = getNextEligibleStep(user?.currentLevel || 'none');
+    const nextStep = user?.currentLevel ? getNextEligibleStep(user.currentLevel) : undefined;
     if (nextStep) {
       navigate('/assessments', { state: { startStep: nextStep } });
     }
@@ -177,7 +177,7 @@ const Dashboard: React.FC = () => {
   };
 
   const renderStudentDashboard = () => {
-    const nextStep = getNextEligibleStep(user?.currentLevel || 'none');
+    const nextStep = user?.currentLevel ? getNextEligibleStep(user.currentLevel) : undefined;
     const recentAssessments = assessmentsData?.data || [];
     const certificates = certificatesData?.data || [];
 

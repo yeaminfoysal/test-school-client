@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startTimer } from '../store/slices/assessmentSlice';
 import { useSubmitAssessmentMutation } from '../store/api/assessmentApi';
 import { RootState } from '../store';
+import { useGetUserByIdQuery } from '../store/api/userApi';
 
 const AssessmentPage: React.FC = () => {
     const { user } = useSelector((state: RootState) => state.auth);
     const { data: questionsResponse, isLoading, error } = useGetQuestionsQuery(
-        { page: 1, limit: 10, student: user?._id, level: user?.currentLevel },
+        { page: 1, limit: 10, student: user?._id, currentLevel: user?.currentLevel },
         { skip: !user?._id || !user?.currentLevel }
     );
     const questions = questionsResponse?.data ?? [];
@@ -21,8 +22,11 @@ const AssessmentPage: React.FC = () => {
 
     const dispatch = useDispatch();
     const [submitAssessment, { isLoading: isSubmitting, isSuccess, isError }] = useSubmitAssessmentMutation();
+    const { data: userData, refetch: refetchUser } = useGetUserByIdQuery(user?._id ?? '', {
+        skip: !user?._id,
+        refetchOnMountOrArgChange: true,
+    });
 
-    console.log(user);
 
     useEffect(() => {
         if (questions.length > 0) {
@@ -60,8 +64,13 @@ const AssessmentPage: React.FC = () => {
                 totalQuestions: questions.length,
             }).unwrap(); // ✅ This resolves with API response data
 
+            if (response.success) {
+                refetchUser();
+                console.log('User data refetched:', userData);
+            }
+
             setShowExplanation(true);
-            console.log("Submitted successfully!");
+            console.log(response);
         } catch (err) {
             console.error("Submission failed:", err);
         }
