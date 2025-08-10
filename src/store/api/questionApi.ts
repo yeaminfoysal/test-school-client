@@ -20,7 +20,7 @@ interface CreateQuestionData {
 export const questionApi = createApi({
   reducerPath: 'questionApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api/questions',
+    baseUrl: 'http://localhost:3000/api/questions',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
       if (token) {
@@ -38,15 +38,17 @@ export const questionApi = createApi({
         limit?: number;
         competency?: string;
         level?: CompetencyLevel;
+        student?: string
       }
     >({
-      query: ({ page = 1, limit = 20, competency, level }) => {
+      query: ({ page = 1, limit = 20, competency, level, student }) => {
         const params = new URLSearchParams({
           page: page.toString(),
           limit: limit.toString(),
         });
         if (competency) params.append('competency', competency);
         if (level) params.append('level', level);
+        if (student) params.append('student', student);
         return `?${params.toString()}`;
       },
       providesTags: ['Question'],

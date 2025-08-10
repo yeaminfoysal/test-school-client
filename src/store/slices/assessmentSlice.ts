@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Assessment, Question, Timer } from '../../types';
+import { Assessment, Timer } from '../../types';
 
 interface AssessmentState {
   currentAssessment: Assessment | null;
@@ -15,7 +15,7 @@ const initialState: AssessmentState = {
   currentQuestionIndex: 0,
   answers: [],
   timer: {
-    timeLeft: 0,
+    timeLeft: 10,
     isRunning: false,
     isPaused: false,
   },

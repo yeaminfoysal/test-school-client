@@ -6,6 +6,8 @@ import { RootState } from '../../store';
 import { decrementTimer, pauseTimer, resumeTimer } from '../../store/slices/assessmentSlice';
 import { formatTime } from '../../utils/helpers';
 import Button from '../common/Button';
+// import { useDispatch } from 'react-redux';
+// import { startTimer } from '../store/slices/assessmentSlice';
 
 interface TimerProps {
   onTimeUp: () => void;
@@ -15,17 +17,17 @@ const Timer: React.FC<TimerProps> = ({ onTimeUp }) => {
   const dispatch = useDispatch();
   const { timer } = useSelector((state: RootState) => state.assessment);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
+useEffect(() => {
+  let interval: ReturnType<typeof setInterval>;
 
-    if (timer.isRunning && !timer.isPaused) {
-      interval = setInterval(() => {
-        dispatch(decrementTimer());
-      }, 1000);
-    }
+  if (timer.isRunning && !timer.isPaused) {
+    interval = setInterval(() => {
+      dispatch(decrementTimer());
+    }, 1000);
+  }
 
-    return () => clearInterval(interval);
-  }, [timer.isRunning, timer.isPaused, dispatch]);
+  return () => clearInterval(interval);
+}, [timer.isRunning, timer.isPaused, dispatch]);
 
   useEffect(() => {
     if (timer.timeLeft <= 0 && timer.isRunning) {

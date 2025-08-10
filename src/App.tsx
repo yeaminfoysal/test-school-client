@@ -17,18 +17,19 @@ import RegisterForm from './components/auth/RegisterForm';
 
 // Main Pages
 import Dashboard from './pages/Dashboard';
+import AssessmentPage from './pages/Assesments';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-  
+
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
 // Public Route Component (redirects to dashboard if authenticated)
 const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-  
+
   return !isAuthenticated ? <>{children}</> : <Navigate to="/dashboard" replace />;
 };
 
@@ -65,7 +66,7 @@ const AppContent: React.FC = () => {
         >
           <Route path="dashboard" element={<Dashboard />} />
           {/* Placeholder for other protected routes */}
-          <Route path="assessments" element={<div className="p-8 text-center text-gray-500">Assessments page coming soon...</div>} />
+          <Route path="assessments" element={<AssessmentPage />} />
           <Route path="assignments" element={<div className="p-8 text-center text-gray-500">Assignments page coming soon...</div>} />
           <Route path="my-assignments" element={<div className="p-8 text-center text-gray-500">My Assignments page coming soon...</div>} />
           <Route path="certificates" element={<div className="p-8 text-center text-gray-500">Certificates page coming soon...</div>} />

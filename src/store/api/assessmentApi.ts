@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../index';
 import {
@@ -10,7 +11,7 @@ import {
 export const assessmentApi = createApi({
   reducerPath: 'assessmentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api/assessments',
+    baseUrl: 'http://localhost:3000/api/assessments',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
       if (token) {
@@ -33,8 +34,14 @@ export const assessmentApi = createApi({
       invalidatesTags: ['Assessment'],
     }),
     submitAssessment: builder.mutation<
-      ApiResponse<{ assessment: Assessment; certificate?: any }>,
-      { assessmentId: string; answers: number[] }
+      ApiResponse<any>,
+      {
+        level:string;
+        student: string;
+        answers: number[];
+        totalCorrect: number;
+        totalQuestions: number;
+      }
     >({
       query: (data) => ({
         url: '/submit',
@@ -43,11 +50,12 @@ export const assessmentApi = createApi({
       }),
       invalidatesTags: ['Assessment'],
     }),
+
     getUserAssessments: builder.query<
       PaginatedResponse<Assessment>,
       { page?: number; limit?: number }
     >({
-      query: ({ page = 1, limit = 10 }) => 
+      query: ({ page = 1, limit = 10 }) =>
         `/user-assessments?page=${page}&limit=${limit}`,
       providesTags: ['Assessment'],
     }),

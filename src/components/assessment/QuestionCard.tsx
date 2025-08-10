@@ -1,9 +1,7 @@
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
-
 import { Question } from '../../types';
 import Card from '../common/Card';
-import Button from '../common/Button';
 
 interface QuestionCardProps {
   question: Question;
@@ -27,16 +25,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
           <h3 className="text-lg font-semibold text-gray-900">
             Question {questionNumber}
           </h3>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-500">
-              {question.level}
-            </span>
-            <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-              {question.competency.name}
-            </span>
-          </div>
+          <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+            {question.level}
+          </span>
         </div>
-        
+
         <p className="text-gray-700 text-base leading-relaxed mb-6">
           {question.question}
         </p>
@@ -89,7 +82,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
                   {showExplanation && isCorrect ? (
                     <CheckCircle className="h-4 w-4" />
                   ) : (
-                    String.fromCharCode(65 + index) // A, B, C, D
+                    String.fromCharCode(65 + index)
                   )}
                 </div>
                 <span className="text-gray-900 flex-1">{option}</span>
