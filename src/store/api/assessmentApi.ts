@@ -11,7 +11,7 @@ import {
 export const assessmentApi = createApi({
   reducerPath: 'assessmentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/assessments',
+    baseUrl: 'https://test-school-server-ten.vercel.app/api/assessments',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
       if (token) {

@@ -20,7 +20,7 @@ interface CreateQuestionData {
 export const questionApi = createApi({
   reducerPath: 'questionApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/questions',
+    baseUrl: 'https://test-school-server-ten.vercel.app/api/questions',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
       if (token) {

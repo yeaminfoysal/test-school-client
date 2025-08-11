@@ -12,7 +12,7 @@ import {
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:3000/api/auth',
+    baseUrl: 'https://test-school-server-ten.vercel.app/api/auth',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.accessToken;
       if (token) {
